@@ -45,6 +45,10 @@ const CartItem = ({ onContinueShopping }) => {
     return item.quantity * parseFloat(item.cost.substring(1));
   };
 
+  const handleCheckout = (e) => {
+    alert("Feature is coming soon!");
+  };
+
   return (
     <div className="cart-container">
       <h2 style={{ color: "black" }}>
@@ -59,7 +63,9 @@ const CartItem = ({ onContinueShopping }) => {
               <div className="cart-item-cost">{item.cost}</div>
               <div className="cart-item-quantity">
                 <button
-                  className={`cart-item-button cart-item-button-dec ${item.quantity === 1 && "disabled"}`}
+                  className={`cart-item-button cart-item-button-dec ${
+                    item.quantity === 1 && "disabled"
+                  }`}
                   onClick={() => handleDecrement(item)}
                   disabled={item.quantity === 1}
                 >
@@ -100,7 +106,13 @@ const CartItem = ({ onContinueShopping }) => {
           Continue Shopping
         </button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button
+          className={`get-started-button1 ${calculateTotalAmount() === 0 && "disabled"}`}
+          onClick={(e) => handleCheckout(e)}
+          disabled={calculateTotalAmount() === 0}
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );

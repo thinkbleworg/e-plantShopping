@@ -245,4 +245,9 @@
     transition: background-color 0.3s ease;
     margin-top: 40px;
   }
+
+  .get-started-button1.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
   
