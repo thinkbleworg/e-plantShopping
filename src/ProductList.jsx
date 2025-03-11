@@ -75,8 +75,24 @@ function ProductList({ onHomeClick }) {
     setTotalQuantity(totalQuantity);
   };
 
+  const recomputeCartItems = () => {
+    if (cart.length) {
+      const remainingItems = new Set(cart.map(item => item.name));
+      const updatedAddedItems = Object.keys(addedToCart)
+        .filter(key => remainingItems.has(key))
+        .reduce((obj, key) => {
+          obj[key] = true;
+          return obj;
+        }, {});
+      setAddedToCart(updatedAddedItems);
+    } else {
+      setAddedToCart({});
+    }
+  };
+
   useEffect(() => {
     calculateTotalQuantity();
+    recomputeCartItems();
   }, [cart]);
 
   return (
